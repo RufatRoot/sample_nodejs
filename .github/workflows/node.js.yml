@@ -44,8 +44,8 @@ jobs:
 
     - uses: anc95/ChatGPT-CodeReview@main
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKENN }}
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEYY }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         working-directory: ./app
 
     - run: npm test
