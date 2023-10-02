@@ -1,17 +1,16 @@
 // test/app.test.js
-const { expect } = require('chai');
-const request = require('supertest');
-const app = require('../app');
+const chai = require('chai');
+const expect = chai.expect;
+const greet = require('../app');
 
-describe('Node.js Web App', () => {
-  it('should respond with "Hello, World!" on / GET', (done) => {
-    request(app)
-      .get('/')
-      .expect(200)
-      .end((err, res) => {
-        if (err) return done(err);
-        expect(res.text).to.equal('Hello, World!');
-        done();
-      });
+describe('Greet Function', () => {
+  it('should greet with "Hello, World!" when no name is provided', () => {
+    const greeting = greet();
+    expect(greeting).to.equal('Hello, World!');
+  });
+
+  it('should greet with the provided name', () => {
+    const greeting = greet('Alice');
+    expect(greeting).to.equal('Hello, Alice!');
   });
 });

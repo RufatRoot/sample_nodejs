@@ -1,9 +1,10 @@
 // app.js
-const express = require('express');
-const app = express();
+function greet(name) {
+  if (!name) {
+    return 'Hello, World!';
+  } else {
+    return `Hello, ${name}!`;
+  }
+}
 
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
-
-module.exports = app;
+module.exports = greet;
