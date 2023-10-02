@@ -4,6 +4,8 @@
 name: Node.js CI
 
 on:
+  push:
+    branches: ["main"]
   pull_request:
     branches: [ "main" ]
 
@@ -39,5 +41,5 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        
+
     - run: npm test
