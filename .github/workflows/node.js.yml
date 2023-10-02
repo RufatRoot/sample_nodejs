@@ -27,7 +27,6 @@ jobs:
       working-directory: ./app
 
     - run: npm ci
-      working-directory: ./app
     
     - name: Run pre-commit checks
       run: npm run pre-commit
