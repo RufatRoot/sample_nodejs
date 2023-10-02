@@ -24,9 +24,11 @@ jobs:
 
     - name: Check for merge conflicts
       run: git diff --check ${{ github.base_ref }}
+      working-directory: ./app
     
     - name: Run pre-commit checks
       run: npm run pre-commit
+      working-directory: ./app
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -35,11 +37,15 @@ jobs:
         cache: 'npm'
 
     - run: npm ci
+      working-directory: ./app
     - run: npm run build --if-present
+      working-directory: ./app
 
     - uses: anc95/ChatGPT-CodeReview@main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        working-directory: ./app
 
     - run: npm test
+      working-directory: ./app
