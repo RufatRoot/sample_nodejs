@@ -49,4 +49,4 @@ jobs:
         working-directory: ./app
 
     - run: npm test
-      working-directory: ./app
+      working-directory: ./app/test
