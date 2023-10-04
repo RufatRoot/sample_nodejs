@@ -1,4 +1,4 @@
-// test/test.js
+// test/app.test.js
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../app.js'); // Import the Express app
