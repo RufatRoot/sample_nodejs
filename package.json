@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./src/test",
-    "stop": "node server.stop.js",
+    "test": "mocha ./src/test && node server.stop.js",
     "pre-commit": "eslint ."
   },
   "config": {
