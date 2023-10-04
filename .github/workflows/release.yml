@@ -61,6 +61,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Set short commit SHA
         id: set_commit_sha
         run: echo "::set-output name=short_sha::${GITHUB_SHA::7}"
