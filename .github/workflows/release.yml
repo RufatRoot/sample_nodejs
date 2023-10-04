@@ -7,9 +7,71 @@ on:
 
 jobs:
   build:
+
+        runs-on: ubuntu-latest
+    
+        strategy:
+          matrix:
+            node-version: [14.x, 16.x, 18.x]
+            # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    
+        steps:
+        - uses: actions/checkout@v3
+    
+        - name: Check for merge conflicts
+          run: git diff --check
+          working-directory: ./src
+    
+        - run: npm ci
+        
+        - name: Run pre-commit checks
+          run: npm run pre-commit
+          working-directory: ./src
+          continue-on-error: true
+    
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
+            cache: 'npm'
+    
+        - run: npm run build --if-present
+          working-directory: ./src
+    
+        - uses: anc95/ChatGPT-CodeReview@main
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+            # Optional
+            LANGUAGE: English
+            OPENAI_API_ENDPOINT: https://api.openai.com/v1
+            MODEL: gpt-3.5-turbo # https://platform.openai.com/docs/models
+            PROMPT: # example: Please check if there are any confusions or irregularities in the following code diff:
+            top_p: 1 # https://platform.openai.com/docs/api-reference/chat/create#chat/create-top_p
+            temperature: 1 # https://platform.openai.com/docs/api-reference/chat/create#chat/create-temperature
+            max_tokens: 10000
+            MAX_PATCH_LENGTH: 10000 # if the patch/diff length is large than MAX_PATCH_LENGTH, will be ignored and won't review. By default, with no MAX_PATCH_LENGTH set, there is also no limit for the patch/diff length.
+            working-directory: ./app
+        - name: SonarQube Scan
+          uses: kitabisa/sonarqube-action@v1.2.0
+          with:
+            host: ${{ secrets.SONARQUBE_HOST }}
+            login: ${{ secrets.SONARQUBE_TOKEN }}
+    
+        - run: npm test
+
+  docker:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Release
-      uses: softprops/action-gh-release@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: true
+          tags: user/app:latest
