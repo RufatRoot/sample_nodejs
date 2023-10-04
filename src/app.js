@@ -1,14 +1,12 @@
-// app.js
-const express = require('express');
-const app = express();
-const port = 3000;
+// calculator.js
 
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
-});
-
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
-});
-
-module.exports = app; // Export the app for testing
+function add(a, b) {
+    return a + b;
+  }
+  
+  function subtract(a, b) {
+    return a - b;
+  }
+  
+  module.exports = { add, subtract };
+  

@@ -1,21 +1,21 @@
-// test/app.test.js
+// test-calculator.js
+
+const { add, subtract } = require('../app.js');
 const chai = require('chai');
-const chaiHttp = require('chai-http');
-const app = require('../app.js'); // Import the Express app
+const expect = chai.expect;
 
-const { expect } = chai;
+describe('Calculator', () => {
+  describe('add', () => {
+    it('should return the sum of two numbers', () => {
+      expect(add(1, 2)).to.equal(3);
+      expect(add(-1, 2)).to.equal(1);
+    });
+  });
 
-chai.use(chaiHttp);
-
-describe('Simple Node.js App', () => {
-  it('should return "Hello, World!" when GET /', (done) => {
-    chai
-      .request(app)
-      .get('/')
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.text).to.equal('Hello, World!');
-        done();
-      });
+  describe('subtract', () => {
+    it('should return the difference between two numbers', () => {
+      expect(subtract(5, 3)).to.equal(2);
+      expect(subtract(2, 2)).to.equal(0);
+    });
   });
 });
