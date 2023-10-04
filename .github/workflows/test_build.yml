@@ -48,7 +48,7 @@ jobs:
     - run: npm run build --if-present
 
     - run: ls -l
-      working-directory: ./app
+      working-directory: app
 
     - uses: anc95/ChatGPT-CodeReview@main
       env:
