@@ -1,16 +1,21 @@
-// test/app.test.js
+// test/test.js
 const chai = require('chai');
-const expect = chai.expect;
-const greet = require('../app');
+const chaiHttp = require('chai-http');
+const app = require('../app.js'); // Import the Express app
 
-describe('Greet Function', () => {
-  it('should greet with "Hello, World!" when no name is provided', () => {
-    const greeting = greet();
-    expect(greeting).to.equal('Hello, World!');
-  });
+const { expect } = chai;
 
-  it('should greet with the provided name', () => {
-    const greeting = greet('Alice');
-    expect(greeting).to.equal('Hello, Alice!');
+chai.use(chaiHttp);
+
+describe('Simple Node.js App', () => {
+  it('should return "Hello, World!" when GET /', (done) => {
+    chai
+      .request(app)
+      .get('/')
+      .end((err, res) => {
+        expect(res).to.have.status(200);
+        expect(res.text).to.equal('Hello, World!');
+        done();
+      });
   });
 });

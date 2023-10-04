@@ -1,10 +1,14 @@
 // app.js
-function greet(name) {
-  if (!name) {
-    return 'Hello, World!';
-  } else {
-    return `Hello, ${name}!`;
-  }
-}
+const express = require('express');
+const app = express();
+const port = 3000;
 
-module.exports = greet;
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
+app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
+});
+
+module.exports = app; // Export the app for testing
