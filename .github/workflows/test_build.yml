@@ -14,6 +14,15 @@ jobs:
   test:
     uses: ./.github/workflows/test.yml
 
+  sca:
+    uses: ./.github/workflows/sca.yml
+  
+  chatgpt:
+    uses: ./.github/workflows/chatgpt.yml
+
+  pre-commit:
+    uses: ./.github/workflows/pre-commit.yml
+
   build:
     uses: ./.github/workflows/build.yml
-    needs: [test]
+    needs: [test, sca, chatgpt, pre-commit]
