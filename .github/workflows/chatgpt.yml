@@ -1,5 +1,11 @@
 name: chatgpt
-on: workflow_call
+on: 
+    workflow_call:
+      secrets:
+        OPENAI_API_KEY:
+          required: true
+        GITHUB_TOKEN:
+          required: true
 jobs:
     chatgpt_workflow_job:
       runs-on: ubuntu-latest
