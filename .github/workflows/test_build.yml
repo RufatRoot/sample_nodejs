@@ -24,7 +24,6 @@ jobs:
     uses: ./.github/workflows/chatgpt.yml
     secrets:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   pre-commit:
     uses: ./.github/workflows/pre-commit.yml
