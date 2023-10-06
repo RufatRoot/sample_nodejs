@@ -13,6 +13,8 @@ on:
 jobs:
   test:
     uses: ./.github/workflows/test.yml
+    secrets: inherit
+
 
   sca:
     uses: ./.github/workflows/sca.yml
