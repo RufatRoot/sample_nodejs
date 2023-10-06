@@ -13,7 +13,9 @@ on:
 jobs:
   test:
     uses: ./.github/workflows/test.yml
-    secrets: inherit
+    secrets:
+      SONARQUBE_HOST: ${{ secrets.SONARQUBE_HOST }}
+      SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
 
 
   sca:
