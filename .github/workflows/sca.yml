@@ -11,8 +11,9 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
+        
         - name: SonarQube Scan
           uses: sonarsource/sonarqube-scan-action@master
-          with:
+          env:
             host: ${{ secrets.SONAR_HOST_URL }}
             login: ${{ secrets.SONAR_TOKEN }}
