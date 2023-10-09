@@ -32,5 +32,5 @@ jobs:
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
   release:
-    uses: ./.github/workflows/release.yml
+    uses: ./.github/workflows/gh-release.yml
     needs: [docker]
