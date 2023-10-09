@@ -12,8 +12,8 @@ jobs:
   sca:
     uses: ./.github/workflows/sca.yml
     secrets:
-      SONARQUBE_HOST: ${{ secrets.SONARQUBE_HOST }}
-      SONARQUBE_TOKEN: ${{ secrets.SONARQUBE_TOKEN }}
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   
   chatgpt:
     uses: ./.github/workflows/chatgpt.yml

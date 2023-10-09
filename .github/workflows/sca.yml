@@ -2,9 +2,9 @@ name: sca
 on: 
   workflow_call:
     secrets:
-      SONARQUBE_HOST:
+      SONAR_HOST_URL:
         required: true
-      SONARQUBE_TOKEN:
+      SONAR_TOKEN:
         required: true
 jobs:
     sca_workflow_job:
@@ -14,5 +14,5 @@ jobs:
         - name: SonarQube Scan
           uses: sonarsource/sonarqube-scan-action@master
           with:
-            host: ${{ secrets.SONARQUBE_HOST }}
-            login: ${{ secrets.SONARQUBE_TOKEN }}
+            host: ${{ secrets.SONAR_HOST_URL }}
+            login: ${{ secrets.SONAR_TOKEN }}
