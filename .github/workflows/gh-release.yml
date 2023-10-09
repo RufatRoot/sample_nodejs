@@ -1,7 +1,7 @@
-name: pre-commit
+name: gh-release
 on: workflow_call
 jobs:
-  pre-commit_workflow_job:
+  gh-release_workflow_job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
