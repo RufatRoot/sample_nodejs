@@ -1,0 +1,33 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: test and build
+on:
+
+  push:
+    branches: ['main']
+
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+
+  sca:
+    uses: ./.github/workflows/sca.yml
+    secrets:
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  
+  chatgpt:
+    uses: ./.github/workflows/chatgpt.yml
+    secrets:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+  pre-commit:
+    uses: ./.github/workflows/pre-commit.yml
+
+  build:
+    uses: ./.github/workflows/build.yml
+    needs: [test, sca, chatgpt, pre-commit]

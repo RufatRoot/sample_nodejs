@@ -1,0 +1,19 @@
+name: sca
+on: 
+  workflow_call:
+    secrets:
+      SONAR_HOST_URL:
+        required: true
+      SONAR_TOKEN:
+        required: true
+jobs:
+    sca_workflow_job:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+
+        - name: SonarQube Scan
+          uses: sonarsource/sonarqube-scan-action@master
+          env:
+            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

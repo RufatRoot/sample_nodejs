@@ -1,0 +1,32 @@
+name: release
+
+on:
+  push:
+    tags:
+     - "v*.*.*"
+
+jobs:
+  test:
+    uses: ./.github/workflows/test.yml
+
+  sca:
+    uses: ./.github/workflows/sca.yml
+    secrets:
+      SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  
+  chatgpt:
+    uses: ./.github/workflows/chatgpt.yml
+    secrets:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+  build:
+    uses: ./.github/workflows/build.yml
+    needs: [test, sca, chatgpt]
+
+  docker:
+    uses: ./.github/workflows/docker.yml
+    needs: [build]
+    secrets: 
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
