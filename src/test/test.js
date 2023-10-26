@@ -13,7 +13,7 @@
 
 // test-calculator.js
 
-const { add, subtract } = require('./src/test/app.test.js');
+const { add, subtract } = require('./app.test.js');
 const chai = require('chai');
 const expect = chai.expect;
 
