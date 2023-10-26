@@ -14,8 +14,8 @@
 // test-calculator.js
 
 const { add, subtract } = require('../app.js');
-const chai = require('chai');
-const expect = chai.expect;
+// const chai = require('chai');
+// const expect = chai.expect;
 
 describe('Calculator', () => {
   describe('add', () => {
