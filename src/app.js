@@ -1,3 +1,16 @@
+// app.js
+
+function add(a, b) {
+    return a + b;
+  }
+  
+  function subtract(a, b) {
+    return a - b;
+  }
+  
+  module.exports = { add, subtract };
+  
+
 // src/app.js
 const express = require('express');
 const app = express();
@@ -12,18 +25,3 @@ app.listen(port, () => {
 });
 
 module.exports = app;
-
-
-
-// // calculator.js
-
-// function add(a, b) {
-//     return a + b;
-//   }
-  
-//   function subtract(a, b) {
-//     return a - b;
-//   }
-  
-//   module.exports = { add, subtract };
-  
