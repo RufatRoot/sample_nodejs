@@ -1,6 +1,6 @@
 // test/test.js
 const request = require('supertest');
-const app = require('../src/app');
+const app = require('../src/app.js');
 
 describe('GET /', () => {
   it('responds with "Hello, Express!"', (done) => {
